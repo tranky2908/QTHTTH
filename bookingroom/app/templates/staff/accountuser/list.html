@@ -1,0 +1,42 @@
+{% extends 'staff/base.html' %}
+
+{% block navbar %}
+{% with page=1 %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}
+
+{% block content %}
+<style>
+    .add{
+        text-align: right;
+    }
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+<div class="add pt-5">
+    <a href="{% url 'create-user' %}" class="btn btn-success"><h5>Thêm Người Dùng</h5></a>
+</div>
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>Tên</th>
+                <th>Số điện thoại</th>
+                <th>Gmail</th>
+                <th>Trạng thái tài khoản</th>
+                <th>Chức năng</th>
+            </tr>
+            {% for u in userlist %}
+            <tr>
+                <td>{{u.name}}</td>
+                <td>{{u.phone}}</td>
+                <td>{{u.gmail}}</td>
+                <td>{{u.status}}</td>
+                <td><a href="{% url 'info-user' u.id %}" class="btn btn-primary">Xét</a></th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}

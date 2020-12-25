@@ -1,0 +1,44 @@
+
+{% extends 'staff/base.html' %}
+
+{% block navbar %}
+    {% with page=0 %}
+        {{ block.super }}
+    {% endwith %}
+{% endblock %}
+
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<style>
+    .add{
+        text-align: right;
+    }
+    .add a{
+        text-decoration: none;
+    }
+</style>
+    <div class="add pt-5">
+        <a href="{% url 'create-staff' %}" class="btn btn-success"><h5>Thêm Nhân Viên</h5   ></a>
+    </div>
+<div class="container">
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>Tên:</th>
+                <th>Số điện thoại</th>
+                <th>Gmail</th>
+                <th>Chức năng</th>
+                
+            </tr>
+            {% for a in accountlist %}
+            <tr>
+                <td>{{a.name}}</td>
+                <td>{{a.phone}}</td>
+                <td>{{a.gmail}}</td>
+                <td><a href="{% url 'info-staff' a.id %}" class="btn btn-primary">Phân quyền</a></th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
